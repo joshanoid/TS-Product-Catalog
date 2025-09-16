@@ -7,15 +7,26 @@
   "author": "József Varga <joshanoid@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
     "husky": "^9.1.7",
+    "jiti": "^2.5.1",
     "lint-staged": "^16.1.6",
-    "prettier": "3.6.2"
+    "prettier": "3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0"
   },
   "scripts": {
     "prepare": "husky",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "format": "prettier --write \"src/**/*.{js,ts,json,css,scss,md}\"",
+    "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": [
+      "eslint",
+      "prettier --write --ignore-unknown"
+    ]
   }
 }
