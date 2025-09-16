@@ -1,0 +1,20 @@
+{
+  "name": "ts-product-catalog",
+  "description": "Frameworkless Product Catalog application written in TypeScript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:joshanoid/TS-Product-Catalog.git",
+  "author": "József Varga <joshanoid@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "prettier": "3.6.2"
+  },
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
