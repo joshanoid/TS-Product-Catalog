@@ -4,6 +4,7 @@ import type { Products } from '../../types';
 import { parseDomString } from '../../utils';
 import { Product } from '../Product';
 import productListTemplate from './template.html?raw';
+import './styles.scss';
 
 export class ProductList {
   private products?: Products;

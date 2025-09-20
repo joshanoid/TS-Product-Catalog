@@ -1,6 +1,7 @@
 import productTemplate from './template.html?raw';
 import type { Product as ProductType } from '../../types';
 import { parseDomString } from '../../utils';
+import './styles.scss';
 
 export class Product {
   private product: ProductType;
