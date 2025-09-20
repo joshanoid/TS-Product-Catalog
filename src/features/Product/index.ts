@@ -20,5 +20,6 @@ export class Product {
       this.product.name;
     (this.container.querySelector('.product-image') as HTMLImageElement).src =
       this.product.image_url;
+    this.container.classList.add(`background-${this.product.ibu}`);
   }
 }

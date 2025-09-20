@@ -1,4 +1,18 @@
+@use 'sass:math';
+
 .product {
   width: 220px;
   height: 286px;
+
+  @for $i from 1 through 100 {
+    $lightness-value: math.div(100 - $i, 100);
+
+    &.background-#{$i} {
+      background-color: hsl(
+        47,
+        75%,
+        calc(101% - math.percentage($lightness-value))
+      );
+    }
+  }
 }
