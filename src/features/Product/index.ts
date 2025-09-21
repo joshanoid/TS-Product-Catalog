@@ -16,10 +16,20 @@ export class Product {
   }
 
   render() {
-    this.container.querySelector('.product-name')!.innerHTML =
-      this.product.name;
-    (this.container.querySelector('.product-image') as HTMLImageElement).src =
-      this.product.image_url;
+    this.container.ariaLabel = `Product name: ${this.product.name}`;
+    this.container.querySelector('.title > h2')!.innerHTML = this.product.name;
+
+    const imageElement = this.container.querySelector(
+      '.image',
+    ) as HTMLImageElement;
+    imageElement.alt = this.product.name;
+    imageElement.src = this.product.image_url;
+
+    this.container.querySelector('.ibu-value')!.innerHTML =
+      this.product.ibu.toString();
+    this.container.querySelector('.abv-value')!.innerHTML =
+      this.product.abv.toString();
+
     this.container.classList.add(`background-${this.product.ibu}`);
   }
 }

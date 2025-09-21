@@ -1,18 +1,144 @@
 @use 'sass:math';
+@use 'sass:color';
+
+@function contrast-text-color($bg-color) {
+  @if (color.channel($bg-color, 'lightness', $space: hsl) > 50%) {
+    @return #000000;
+  } @else {
+    @return #ffffff;
+  }
+}
 
 .product {
+  $title-height: 54px;
+  $horizontal-padding: 4px;
+  $top-padding: 4px;
+  $border-radius: 8px;
+
   width: 220px;
   height: 286px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: $top-padding $horizontal-padding 8px;
+  box-shadow:
+    0px 16px 24px rgba(26, 26, 26, 0.3),
+    0px 4px 4px rgba(26, 26, 26, 0.4);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
 
   @for $i from 1 through 100 {
-    $lightness-value: math.div(100 - $i, 100);
+    $lightness: math.div(100 - $i, 100);
+    $bgcolor: hsl(47, 75%, calc(101% - math.percentage($lightness)));
 
     &.background-#{$i} {
-      background-color: hsl(
-        47,
-        75%,
-        calc(101% - math.percentage($lightness-value))
-      );
+      background-color: $bgcolor;
+
+      .title > h2 {
+        color: contrast-text-color($bgcolor);
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0px 4px 4px rgba(26, 26, 26, 0.4);
+
+    .image-container {
+      .abv-badge {
+        right: 10px;
+      }
+    }
+
+    .title {
+      h2 {
+        color: #af5800;
+      }
+    }
+  }
+
+  .image-container {
+    width: 100%;
+    height: calc(100% - 54px);
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    > img {
+      height: 96%;
+    }
+
+    .ibu-badge {
+      position: absolute;
+      bottom: 0;
+      left: -$horizontal-padding;
+      width: 64px;
+      height: 30px;
+      background-color: #00a269;
+      color: #f8f8f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .ibu-label {
+        font-weight: 500;
+        font-size: 12px;
+        color: rgba(248, 248, 248, 0.7);
+      }
+
+      .ibu-value {
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+
+    .abv-badge {
+      position: absolute;
+      top: -$top-padding;
+      right: -$horizontal-padding;
+      width: 67px;
+      height: 67px;
+      background-color: #af5800;
+      color: #f8f8f8;
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+      border-top-right-radius: $border-radius;
+      transition: right 1s;
+
+      .abv-details-container {
+        transform: rotate(45deg) translate(30px, 5px);
+
+        .abv-value {
+          font-weight: 600;
+          font-size: 18px;
+        }
+
+        .abv-percentage-text {
+          font-weight: 500;
+          font-size: 12px;
+          color: rgba(248, 248, 248, 0.7);
+        }
+      }
+    }
+  }
+
+  .title {
+    width: 100%;
+    height: $title-height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+
+    > h2 {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 100%;
+      text-align: center;
+      transition: color 0.2s;
     }
   }
 }
