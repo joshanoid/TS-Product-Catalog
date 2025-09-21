@@ -1,6 +1,7 @@
 import { ProductList } from './features/ProductList/index.ts';
 import { Store } from './store.ts';
 import type { ProductsStore } from './types.ts';
+import './reset.css';
 import './styles.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
