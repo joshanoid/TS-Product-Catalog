@@ -18,3 +18,9 @@ export type ProductsResponse = {
   };
   record: Products;
 };
+
+export type ProductsStore = {
+  products: Products;
+  loading: boolean;
+  error: Error | null;
+};
