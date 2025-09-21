@@ -1,5 +1,10 @@
 import { ProductList } from './features/ProductList/index.ts';
+import { Store } from './store.ts';
 import './styles.scss';
 
-const app = new ProductList(document.querySelector('#root')!);
-app.render();
+document.addEventListener('DOMContentLoaded', () => {
+  const store = new Store({ products: [], loading: true, error: null });
+  const app = new ProductList(document.querySelector('#root')!, store);
+
+  app.render();
+});
