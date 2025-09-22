@@ -13,6 +13,7 @@ export class Product {
     this.container = parseDomString(productTemplate);
     this.parentNode.appendChild(this.container);
     this.product = product;
+    this.container.dataset.id = this.product.id.toString();
   }
 
   render() {

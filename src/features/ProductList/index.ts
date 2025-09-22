@@ -5,6 +5,7 @@ import { parseDomString } from '../../utils';
 import { Product } from '../Product';
 import productListTemplate from './template.html?raw';
 import type { Store } from '../../store';
+import { Modal } from '../../components/Modal';
 import './styles.scss';
 
 export class ProductList {
@@ -23,6 +24,26 @@ export class ProductList {
 
     this.store = store;
     this.store.subscribe(this.render.bind(this));
+
+    this.container.addEventListener('click', (event) => {
+      const productElement = (event.target as HTMLElement).closest(
+        '.product',
+      ) as HTMLElement | null;
+      if (productElement?.dataset.id) {
+        const product = this.store
+          .getState()
+          .products.find(
+            (item) => item.id === Number(productElement.dataset.id),
+          );
+        const modal = new Modal();
+
+        setTimeout(() => {
+          modal.open(document.createElement('div'));
+        }, 0);
+
+        console.log(product);
+      }
+    });
   }
 
   async render() {
