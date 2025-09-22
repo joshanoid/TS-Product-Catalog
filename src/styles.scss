@@ -5,6 +5,10 @@ body {
   font-style: normal;
   font-size: 16px;
   line-height: 100%;
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }
 
 #root {
