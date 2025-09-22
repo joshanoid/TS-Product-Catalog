@@ -28,7 +28,10 @@ export class Modal {
 
   private attachEventListeners(): void {
     this.container.addEventListener('transitionend', () => {
-      if (!this.container.classList.contains('is-open')) {
+      if (
+        !this.container.classList.contains('is-open') &&
+        document.body.querySelector('.modal-container')
+      ) {
         document.body.removeChild(this.container);
       }
     });
