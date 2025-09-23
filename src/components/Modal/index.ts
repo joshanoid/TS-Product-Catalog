@@ -9,6 +9,7 @@ export class Modal {
   private closeButton: HTMLButtonElement;
   private backdrop: HTMLElement;
   private readonly boundKeydown: (event: KeyboardEvent) => void;
+  private readonly boundClose: () => void;
 
   constructor() {
     this.container = parseDomString(template);
@@ -23,6 +24,7 @@ export class Modal {
     ) as HTMLElement;
     document.body.appendChild(this.container);
     this.boundKeydown = this.handleKeydown.bind(this);
+    this.boundClose = this.close.bind(this);
 
     this.attachEventListeners();
   }
@@ -36,8 +38,8 @@ export class Modal {
         document.body.removeChild(this.container);
       }
     });
-    this.closeButton.addEventListener('click', this.close.bind(this));
-    this.backdrop.addEventListener('click', this.close.bind(this));
+    this.closeButton.addEventListener('click', this.boundClose);
+    this.backdrop.addEventListener('click', this.boundClose);
     document.addEventListener('keydown', this.boundKeydown);
   }
 
@@ -62,6 +64,11 @@ export class Modal {
         typeof options.height === 'number'
           ? `${options.height}px`
           : options.height;
+    }
+    if (options?.closable === false) {
+      this.container.querySelector('.modal-close-button')?.remove();
+      this.backdrop.removeEventListener('click', this.boundClose);
+      document.removeEventListener('keydown', this.boundKeydown);
     }
     this.content.appendChild(content);
     document.body.classList.add('modal-open');
