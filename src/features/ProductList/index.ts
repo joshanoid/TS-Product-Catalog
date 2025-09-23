@@ -4,6 +4,7 @@ import type { ProductsStore } from '../../types';
 import { parseDomString } from '../../utils';
 import { Product } from '../Product';
 import productListTemplate from './template.html?raw';
+import apiErrorTemplate from './components/ApiError/template.html?raw';
 import type { Store } from '../../store';
 import { Modal } from '../../components/Modal';
 import { ProductDetails } from '../ProductDetails';
@@ -68,7 +69,11 @@ export class ProductList {
     }
 
     if (error) {
-      console.error(error);
+      const errorModal = new Modal();
+      errorModal.open(
+        parseDomString(apiErrorTemplate.replace('{{error}}', error.message)),
+        { closable: false },
+      );
     }
 
     products.forEach((item) => {
