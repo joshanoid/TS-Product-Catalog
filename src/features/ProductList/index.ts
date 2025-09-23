@@ -7,6 +7,7 @@ import productListTemplate from './template.html?raw';
 import type { Store } from '../../store';
 import { Modal } from '../../components/Modal';
 import './styles.scss';
+import { ProductDetails } from '../ProductDetails';
 
 export class ProductList {
   private parentNode: HTMLElement;
@@ -38,7 +39,12 @@ export class ProductList {
         const modal = new Modal();
 
         setTimeout(() => {
-          modal.open(document.createElement('div'), {
+          if (!product) return;
+
+          const productDetails = new ProductDetails(product);
+          productDetails.render();
+
+          modal.open(productDetails.get(), {
             width: 745,
             height: 463,
           });
