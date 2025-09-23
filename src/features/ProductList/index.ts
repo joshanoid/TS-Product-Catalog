@@ -6,8 +6,8 @@ import { Product } from '../Product';
 import productListTemplate from './template.html?raw';
 import type { Store } from '../../store';
 import { Modal } from '../../components/Modal';
-import './styles.scss';
 import { ProductDetails } from '../ProductDetails';
+import './styles.scss';
 
 export class ProductList {
   private parentNode: HTMLElement;
