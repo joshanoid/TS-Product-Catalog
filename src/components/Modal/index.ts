@@ -1,6 +1,7 @@
 import template from './template.html?raw';
-import './styles.scss';
 import { parseDomString } from '../../utils';
+import type { ModalOptions } from './types';
+import './styles.scss';
 
 export class Modal {
   private container: HTMLElement;
@@ -49,7 +50,19 @@ export class Modal {
     }
   }
 
-  public open(content: HTMLElement): void {
+  public open(content: HTMLElement, options?: ModalOptions): void {
+    if (options?.width) {
+      this.content.style.width =
+        typeof options.width === 'number'
+          ? `${options.width}px`
+          : options.width;
+    }
+    if (options?.height) {
+      this.content.style.height =
+        typeof options.height === 'number'
+          ? `${options.height}px`
+          : options.height;
+    }
     this.content.appendChild(content);
     document.body.classList.add('modal-open');
     this.container.classList.add('is-open');

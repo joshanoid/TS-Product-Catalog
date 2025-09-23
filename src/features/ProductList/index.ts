@@ -38,7 +38,10 @@ export class ProductList {
         const modal = new Modal();
 
         setTimeout(() => {
-          modal.open(document.createElement('div'));
+          modal.open(document.createElement('div'), {
+            width: 745,
+            height: 463,
+          });
         }, 0);
 
         console.log(product);
