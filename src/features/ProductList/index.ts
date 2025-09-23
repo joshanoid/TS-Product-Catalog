@@ -49,8 +49,6 @@ export class ProductList {
             height: 463,
           });
         }, 0);
-
-        console.log(product);
       }
     });
   }
